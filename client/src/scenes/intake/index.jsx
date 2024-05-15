@@ -1,4 +1,4 @@
-import { Box, useTheme, HorizontalStepper } from '@mui/material'
+import { Box, useTheme } from '@mui/material'
 import Header from 'components/Header';
 import React from 'react'
 import HorizontalLinearStepper from './HorizontalStepper';

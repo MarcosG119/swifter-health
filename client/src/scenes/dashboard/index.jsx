@@ -2,10 +2,6 @@ import React from "react";
 import FlexBetween from "components/FlexBetween";
 import Header from "components/Header";
 import {
-  DownloadOutlined,
-  Email,
-  PointOfSale,
-  PersonAdd,
   Traffic,
   Person,
   AirlineSeatFlat,
@@ -13,7 +9,6 @@ import {
 } from "@mui/icons-material";
 import {
   Box,
-  Button,
   useTheme,
   useMediaQuery,
   Typography
