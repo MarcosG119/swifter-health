@@ -11,7 +11,7 @@ const SeverityBarChart = ({ patients }) => {
 
 
   const severityCounts = patients.reduce((counts, patient) => {
-    const severity = patient._severity;
+    const severity = patient.severity;
     if (!counts[severity]) {
       counts[severity] = 0;
     }

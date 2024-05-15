@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -7,15 +6,21 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
+import { useSendPatientDataMutation } from 'state/api';
 import { useTheme } from "@mui/material/styles";
+import React, { useContext, useEffect } from 'react';
+import { Context } from '../index';
 
 const steps = ['Take in patient information', 'Confirm patient information'];
 
 export default function HorizontalLinearStepper() {
   const theme = useTheme();
+  const [sendPatientData] = useSendPatientDataMutation();
+  const [patientObj, setPatientObj] = useContext(Context);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
+  useEffect(() => {}, [patientObj]);
   const isStepOptional = (step) => {
     return false;
   };
@@ -34,6 +39,16 @@ export default function HorizontalLinearStepper() {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
+
+  const handleFinish = async () => {
+    try {
+      await sendPatientData(patientObj);
+      handleNext();
+      setPatientObj({});
+    } catch (err) {
+      console.error('Error sending patient data.', err);
+    }
+  }
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -125,15 +140,28 @@ export default function HorizontalLinearStepper() {
               </Button>
             )}
 
-            <Button 
-              onClick={handleNext}
-              sx={{ 
-                mr: 1, 
-                color: theme.palette.secondary.main,
-              }}
-            >
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
+            
+              {activeStep === steps.length - 1 ? 
+              <Button 
+                disabled={!patientObj.Name}
+                onClick={handleFinish}
+                sx={{ 
+                  mr: 1, 
+                  color: theme.palette.secondary.main,
+                }}
+              >
+                Finish
+              </Button> : 
+                <Button 
+                  onClick={handleNext}
+                  sx={{ 
+                    mr: 1, 
+                    color: theme.palette.secondary.main,
+                  }}
+                >
+                  Next
+                </Button>}
+            
           </Box>
         </React.Fragment>
       )}
