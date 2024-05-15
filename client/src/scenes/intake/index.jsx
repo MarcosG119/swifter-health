@@ -1,11 +1,15 @@
 import { Box, useTheme } from '@mui/material'
 import Header from 'components/Header';
-import React from 'react'
-import HorizontalLinearStepper from './HorizontalStepper';
+import React, { useState, createContext } from 'react';
+import HorizontalLinearStepper from './components/HorizontalStepper';
+
+export const Context = createContext();
 
 const Intake = () => {
   const theme = useTheme();
-  return (<>
+  const [patientObj, setPatientObj] = useState({});
+
+  return (<Context.Provider value={[patientObj, setPatientObj]}>
       <Box m="1.5rem 2.5rem">
         <Header title="Intake" subtitle="Get new patient information"/>
       </Box>
@@ -17,7 +21,7 @@ const Intake = () => {
       >
         <HorizontalLinearStepper />
       </Box>
-    </>
+    </Context.Provider>
   )
 }
 

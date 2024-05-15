@@ -16,56 +16,50 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 // import OverviewChart from "components/OverviewChart";
 // import { useGetDashboardQuery } from "state/api";
+import { useGetPatientsQuery } from "state/api";
 import SeverityBarChart from "components/SeverityBarChart";
 import StatBox from "components/StatBox";
-import Patients from "../../data/PatientData";
 
 const Dashboard = () => {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
-  // const { data, isLoading } = useGetDashboardQuery();
-  const patientData = JSON.parse(Patients);
-  const isLoading = false;
-  console.log(patientData);
+  const { data, isLoading } = useGetPatientsQuery();
+  console.log(isLoading)
+  //console.log(patientData);
 
   const columns = [
     {
-      field: "_patientID",
+      field: "_id",
       headerName: "Patient Id",
       flex: 1,
     },
     {
-      field: "_name",
+      field: "name",
       headerName: "Name",
       flex: 1,
     },
     {
-      field: "_age",
+      field: "age",
       headerName: "Age",
       flex: 0.3,
     },
     {
-      field:"_weight",
+      field:"weight",
       headerName:"Weight",
       flex: 0.3,
     },
     {
-      field: "_severity",
+      field: "severity",
       headerName: "Severity Level",
       flex: 0.4,
     },
     {
-      field: "_symptoms",
+      field: "symptoms",
       headerName: "Symptoms",
       flex: 1,
     },
     {
-      field: "_needs_more_info",
-      headerName: "Needs More Info",
-      flex: 0.5,
-    },
-    {
-      field: "_suggested_tests",
+      field: "tests",
       headerName: "Suggested Tests",
       flex: 1,
     },
@@ -126,7 +120,7 @@ const Dashboard = () => {
             # of Patients Waiting by Severity
           </Typography>
           {/* We want to put a bar chart here visually displaying severity */}
-          {patientData ? <SeverityBarChart patients={patientData} /> : <>Loading...</>}
+          {data ? <SeverityBarChart patients={data} /> : <>Loading...</>}
         </Box>
         <StatBox
           title="Average Wait Time"
@@ -183,9 +177,9 @@ const Dashboard = () => {
           }}
         >
           <DataGrid
-            loading={isLoading || !patientData}
-            getRowId={(row) => row._patientID}
-            rows={(patientData) || []}
+            loading={isLoading || !data}
+            getRowId={(row) => row._id}
+            rows={(data) || []}
             columns={columns}
           />
         </Box>

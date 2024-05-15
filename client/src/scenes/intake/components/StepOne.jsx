@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from 'components/Header'
 import { Typography } from '@mui/material'
-import AudioRecorder from 'components/AudioRecorder';
+import AudioRecorder from 'scenes/intake/components/AudioRecorder';
 
 const StepOne = () => {
   return (
