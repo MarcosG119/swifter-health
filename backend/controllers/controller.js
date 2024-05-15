@@ -24,23 +24,29 @@ const intake = async (req, res) => {
 
 	try {
 		const patientData = JSON.parse(completion.choices[0]['message']['content'])
-		const name = patientData['Name'] || 'Anonymous'
-		const age = patientData['Age'] || 0
-		const ethnicity = patientData['Ethnicity'] || 'Unknown'
-		const height = patientData['Height'] || 0
-		const weight = patientData['Weight'] || 0
-		const gender = patientData['Gender'] || true
-		const symptoms = patientData['Symptoms'] || []
-		const tests = patientData['Tests'] || []
-		const moreInfo = patientData['moreInfo'] || true
-		const severity = patientData['Severity'] || 2
-
-		const patient = await Patient.create({name, age, ethnicity, height, weight, gender, symptoms, moreInfo, tests, severity})
-		res.status(200).json(patient)
-		
+		res.status(200).json(patientData)
 	} catch (e) {
 		res.status(500).json({'Error': e.message})
 	}
+
+}
+
+const addToDb = async (req, res) => {
+	const patientData = req.body
+
+	const name = patientData['Name'] || 'Anonymous'
+	const age = patientData['Age'] || 0
+	const ethnicity = patientData['Ethnicity'] || 'Unknown'
+	const height = patientData['Height'] || 0
+	const weight = patientData['Weight'] || 0
+	const gender = patientData['Gender'] || true
+	const symptoms = patientData['Symptoms'] || []
+	const tests = patientData['Tests'] || []
+	const moreInfo = patientData['moreInfo'] || true
+	const severity = patientData['Severity'] || 2
+
+	const patient = await Patient.create({name, age, ethnicity, height, weight, gender, symptoms, moreInfo, tests, severity})
+	res.status(200).json(patient)
 
 }
 
@@ -51,5 +57,6 @@ const fetchAll = async (req, res) => {
 
 module.exports = {
 	intake,
+	addToDb,
 	fetchAll,
 }

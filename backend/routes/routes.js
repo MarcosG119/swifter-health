@@ -18,12 +18,14 @@ const upload = multer({ storage: storage });
 
 const {
 	intake,
+	addToDb,
 	fetchAll,
 } = require('../controllers/controller')
 
 const router = express.Router()
 
 router.post('/intake', upload.single('wavfile'), intake)
+router.post('/addToDb', addToDb)
 router.get('/fetchAll', fetchAll)
 
 module.exports = router
