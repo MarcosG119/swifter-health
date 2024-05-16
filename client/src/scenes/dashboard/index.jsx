@@ -85,7 +85,7 @@ const Dashboard = () => {
         <StatBox
           title="Total Patients Today"
           //value={data && data.totalCustomers}
-          value={34}
+          value={data ? data.length : 0}
           subValue="12 in the past hour"
           //description="Since last month"
           icon={
