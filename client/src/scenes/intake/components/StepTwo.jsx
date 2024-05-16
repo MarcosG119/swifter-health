@@ -43,6 +43,7 @@ const StepTwo = () => {
         <TextField id="Symptoms" label="Symptoms" variant="outlined" defaultValue={patientObj.Symptoms} onChange={handleChange} required multiline />
         </Stack>
       </FormControl>
+      <Typography>Severity: {patientObj.Severity}</Typography>
       <AudioRecorder />
       
     </Stack>
