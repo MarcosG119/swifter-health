@@ -1,9 +1,9 @@
 import { Button, useTheme } from '@mui/material';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useCreatePatientDataMutation } from 'state/api';
 import { Context } from '../index';
-import { AudioRecorder as VoiceRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
-import { DisabledByDefault } from '@mui/icons-material';
+import { useAudioRecorder } from 'react-audio-voice-recorder';
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 
 const AudioRecorder = () => {
   const theme = useTheme();
@@ -65,7 +65,13 @@ const AudioRecorder = () => {
             color: '#3c52b2',
           }
         }}
-      > {recorderControls.isRecording ? 'Stop Recording' : 'Start Recording'} </Button>
+      > 
+      <KeyboardVoiceIcon sx={{
+          fontSize: "14px",
+      }}
+      />
+        {recorderControls.isRecording ? ' Stop Recording' : ' Start Recording'} 
+      </Button>
     </div>
   );
 };

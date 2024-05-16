@@ -44,6 +44,11 @@ const Dashboard = () => {
       flex: 0.3,
     },
     {
+      field: "height",
+      headerName: "Height",
+      flex: 0.3,
+    },
+    {
       field:"weight",
       headerName:"Weight",
       flex: 0.3,
@@ -85,7 +90,7 @@ const Dashboard = () => {
         <StatBox
           title="Total Patients Today"
           //value={data && data.totalCustomers}
-          value={34}
+          value={54}
           subValue="12 in the past hour"
           //description="Since last month"
           icon={
@@ -137,7 +142,7 @@ const Dashboard = () => {
         <StatBox
           title="Patients in Queue"
           //value={data && data.yearlySalesTotal}
-          value={52}
+          value={data ? data.length : 0}
           subValue="5 New Arrivals"
           icon={
             <Traffic
