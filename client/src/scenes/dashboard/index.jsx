@@ -44,6 +44,11 @@ const Dashboard = () => {
       flex: 0.3,
     },
     {
+      field: "height",
+      headerName: "Height",
+      flex: 0.3,
+    },
+    {
       field:"weight",
       headerName:"Weight",
       flex: 0.3,
